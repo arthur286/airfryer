@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Air Fryer Sem Segredos — A Experiência Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#241A12;
+    --ink-soft:#3A2C1F;
+    --parchment:#FBF3E4;
+    --parchment-2:#F3E7D2;
+    --paper-line:#DDCBA9;
+    --amber:#E3A21A;
+    --amber-deep:#B87A0E;
+    --chili:#B33F2E;
+    --chili-deep:#8E2E20;
+    --basil:#4B6B3A;
+    --cream-text:#F7EEDD;
+    --shadow: 0 20px 40px -20px rgba(36,26,18,0.35);
+    --radius: 18px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  section{padding:96px 0;}
+  @media (max-width:640px){
+    section{padding:64px 0;}
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;background:var(--amber);
+  }
+
+  /* BUTTONS */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:19px 34px;
+    border-radius:999px;
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:16.5px;
+    letter-spacing:0.01em;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn:focus-visible{outline:3px solid var(--amber); outline-offset:3px;}
+  .btn-primary{
+    background:var(--chili);
+    color:var(--cream-text);
+    box-shadow:0 14px 30px -12px rgba(179,63,46,0.55);
+  }
+  .btn-primary:hover{background:var(--chili-deep); transform:translateY(-2px);}
+  .btn-primary .arrow{transition:transform .18s ease;}
+  .btn-primary:hover .arrow{transform:translateX(4px);}
+  .btn-ghost{
+    background:transparent;
+    border:1.5px solid rgba(247,238,221,0.4);
+    color:var(--cream-text);
+  }
+  .btn-ghost:hover{border-color:var(--amber); color:var(--amber);}
+
+  /* ================= HERO ================= */
+  .hero{
+    background:
+      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(227,162,26,0.18), transparent 60%),
+      linear-gradient(180deg, var(--ink) 0%, #1B130D 100%);
+    color:var(--cream-text);
+    padding:88px 0 110px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr; text-align:center;}
+    .hero .eyebrow::before{display:none;}
+    .dial-wrap{margin:0 auto;}
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 4.6vw, 3.6rem);
+    line-height:1.06;
+    color:#fff;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--amber);
+  }
+  .hero p.lede{
+    margin-top:22px;
+    font-size:18.5px;
+    max-width:520px;
+    color:rgba(247,238,221,0.82);
+  }
+  @media (max-width:900px){ .hero p.lede{margin-inline:auto;} }
+  .hero-ctas{
+    margin-top:34px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  @media (max-width:900px){ .hero-ctas{justify-content:center;} }
+  .trust-line{
+    margin-top:22px;
+    font-size:13.5px;
+    color:rgba(247,238,221,0.55);
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:0.02em;
+  }
+
+  /* Dial — signature element */
+  .dial-wrap{
+    position:relative;
+    width:320px;
+    height:320px;
+    max-width:80vw;
+  }
+  .dial-ring{
+    position:absolute; inset:0;
+    border-radius:50%;
+    background:conic-gradient(from -130deg, #6b7a52 0deg, var(--amber) 160deg, var(--chili) 260deg, var(--chili) 300deg);
+    padding:14px;
+    box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
+  .dial-inner{
+    width:100%; height:100%;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #2C2015, #17110B 75%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    position:relative;
+  }
+  .dial-readout{
+    font-family:'JetBrains Mono',monospace;
+    font-size:2.5rem;
+    font-weight:700;
+    color:var(--amber);
+    line-height:1;
+  }
+  .dial-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:rgba(247,238,221,0.6);
+  }
+  .dial-state{
+    margin-top:10px;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:17px;
+    color:#fff;
+    min-height:24px;
+  }
+  .dial-slider{
+    width:78%;
+    margin-top:14px;
+    accent-color:var(--amber);
+  }
+  .dial-needle-hint{
+    position:absolute;
+    top:-14px; left:50%;
+    transform:translateX(-50%);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:rgba(247,238,221,0.45);
+    letter-spacing:0.1em;
+  }
+
+  /* ================= PROBLEM ================= */
+  .problem{background:var(--parchment);}
+  .section-head{
+    max-width:640px;
+    margin-bottom:52px;
+  }
+  .section-head.center{margin-inline:auto; text-align:center;}
+  .section-head h2{
+    font-size:clamp(1.9rem,3.4vw,2.7rem);
+    line-height:1.12;
+  }
+  .section-head p{
+    margin-top:16px;
+    font-size:17px;
+    color:var(--ink-soft);
+  }
+
+  .card-scatter{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  @media (max-width:820px){ .card-scatter{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .card-scatter{grid-template-columns:1fr;} }
+  .pain-card{
+    background:#fff;
+    border:1px solid var(--paper-line);
+    border-radius:14px;
+    padding:26px 22px;
+    box-shadow:0 12px 28px -18px rgba(36,26,18,0.25);
+  }
+  .pain-card:nth-child(2n){transform:rotate(-0.6deg);}
+  .pain-card:nth-child(3n){transform:rotate(0.6deg);}
+  .pain-card .x{
+    display:inline-flex;
+    width:28px;height:28px;
+    align-items:center;justify-content:center;
+    border-radius:50%;
+    background:rgba(179,63,46,0.1);
+    color:var(--chili);
+    font-weight:700;
+    margin-bottom:14px;
+    font-size:15px;
+  }
+  .pain-card p{margin:0; font-size:15.5px; color:var(--ink-soft);}
+
+  /* ================= SOLUTION ================= */
+  .solution{
+    background:var(--parchment-2);
+    border-top:1px solid var(--paper-line);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .solution-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:860px){ .solution-grid{grid-template-columns:1fr;} }
+  .solution h2{font-size:clamp(1.9rem,3.4vw,2.6rem); line-height:1.14;}
+  .solution .lede{font-size:17.5px; color:var(--ink-soft); margin-top:18px;}
+  .badge-stack{display:flex; flex-direction:column; gap:14px;}
+  .badge-row{
+    display:flex; align-items:center; gap:14px;
+    background:#fff;
+    border:1px solid var(--paper-line);
+    border-radius:12px;
+    padding:16px 18px;
+  }
+  .badge-row .num{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    color:var(--amber-deep);
+    font-size:14px;
+    min-width:34px;
+  }
+  .badge-row p{margin:0; font-size:15px; color:var(--ink-soft);}
+
+  /* ================= BENEFITS ================= */
+  .benefits{background:var(--parchment);}
+  .benefit-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px 32px;
+  }
+  @media (max-width:700px){ .benefit-grid{grid-template-columns:1fr;} }
+  .benefit-item{
+    display:flex;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1px dashed var(--paper-line);
+  }
+  .benefit-item .check{
+    flex:none;
+    width:20px;height:20px;
+    border-radius:5px;
+    background:var(--basil);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;
+    margin-top:2px;
+  }
+  .benefit-item p{margin:0; font-size:15px; color:var(--ink-soft);}
+
+  /* ================= INCLUDED ================= */
+  .included{
+    background:var(--ink);
+    color:var(--cream-text);
+  }
+  .included .section-head h2{color:#fff;}
+  .included .section-head p{color:rgba(247,238,221,0.7);}
+  .main-product{
+    background:linear-gradient(135deg, #2C2015, #17110B);
+    border:1px solid rgba(227,162,26,0.35);
+    border-radius:var(--radius);
+    padding:38px;
+    margin-bottom:36px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:26px;
+    align-items:center;
+  }
+  @media (max-width:640px){ .main-product{grid-template-columns:1fr; text-align:center;} }
+  .main-product .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--amber);
+    background:rgba(227,162,26,0.12);
+    padding:6px 12px;
+    border-radius:999px;
+    display:inline-block;
+    margin-bottom:12px;
+  }
+  .main-product h3{font-size:1.6rem; color:#fff;}
+  .main-product p{color:rgba(247,238,221,0.75); margin-top:10px; font-size:15px;}
+  .book-icon{
+    width:88px;height:110px;
+    border-radius:8px;
+    background:linear-gradient(160deg, var(--amber), var(--amber-deep));
+    position:relative;
+    box-shadow:0 16px 30px -10px rgba(227,162,26,0.4);
+  }
+  .book-icon::after{
+    content:"";
+    position:absolute; left:10px; top:14px; right:10px; bottom:14px;
+    border:1.5px dashed rgba(36,26,18,0.35);
+    border-radius:4px;
+  }
+
+  .menu-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .menu-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    padding:20px 0;
+    border-bottom:1px solid rgba(247,238,221,0.12);
+  }
+  .menu-item .left{max-width:640px;}
+  .menu-item .name{font-weight:700; font-size:16px; color:#fff;}
+  .menu-item .desc{font-size:14.5px; color:rgba(247,238,221,0.65); margin-top:4px;}
+  .menu-item .price{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--amber);
+    font-weight:700;
+    white-space:nowrap;
+    font-size:15px;
+  }
+
+  /* ================= TRANSFORMATION ================= */
+  .transformation{
+    background:var(--parchment-2);
+  }
+  .transform-panel{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  @media (max-width:760px){ .transform-panel{grid-template-columns:1fr;} }
+  .transform-half{padding:44px 38px;}
+  .transform-half.before{
+    background:#E7DCC5;
+    color:var(--ink-soft);
+  }
+  .transform-half.after{
+    background:linear-gradient(160deg, var(--ink), #17110B);
+    color:var(--cream-text);
+  }
+  .transform-half .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    opacity:0.6;
+    margin-bottom:14px;
+    display:block;
+  }
+  .transform-half p{font-size:16px; line-height:1.65;}
+  .transform-half.after .tag{color:var(--amber);}
+
+  /* ================= TESTIMONIALS ================= */
+  .testi-note{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    background:var(--parchment-2);
+    border:1px dashed var(--paper-line);
+    border-radius:10px;
+    padding:12px 16px;
+    margin-bottom:36px;
+    max-width:640px;
+  }
+  .testi-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  @media (max-width:820px){ .testi-grid{grid-template-columns:1fr;} }
+  .ticket{
+    background:#fff;
+    border:1px solid var(--paper-line);
+    border-radius:4px;
+    padding:24px 22px;
+    position:relative;
+    box-shadow:0 10px 24px -16px rgba(36,26,18,0.3);
+  }
+  .ticket::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:4px;
+    background:repeating-linear-gradient(90deg, var(--paper-line) 0 8px, transparent 8px 16px);
+  }
+  .ticket p.quote{font-size:15px; font-style:italic; color:var(--ink-soft); margin:0 0 16px;}
+  .ticket .who{font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--amber-deep); font-weight:700;}
+  .ticket .illus{
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    color:#9b8b6f;
+    margin-top:6px;
+    letter-spacing:0.03em;
+  }
+
+  /* ================= GUARANTEE ================= */
+  .guarantee{
+    background:var(--parchment);
+    text-align:center;
+  }
+  .stamp{
+    width:150px;height:150px;
+    border-radius:50%;
+    border:3px solid var(--basil);
+    color:var(--basil);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 30px;
+    transform:rotate(-8deg);
+    font-family:'JetBrains Mono',monospace;
+  }
+  .stamp .num{font-size:2.4rem; font-weight:700; line-height:1;}
+  .stamp .txt{font-size:11px; letter-spacing:0.08em; text-transform:uppercase; margin-top:4px;}
+  .guarantee h2{font-size:clamp(1.6rem,3vw,2.2rem); max-width:600px; margin:0 auto 16px;}
+  .guarantee p{max-width:560px; margin:0 auto; color:var(--ink-soft); font-size:16px;}
+
+  /* ================= OFFER ================= */
+  .offer{
+    background:var(--ink);
+    color:var(--cream-text);
+  }
+  .receipt{
+    background:var(--parchment);
+    color:var(--ink);
+    max-width:480px;
+    margin:0 auto;
+    border-radius:6px;
+    padding:38px 34px 30px;
+    position:relative;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+  }
+  .receipt::before, .receipt::after{
+    content:"";
+    position:absolute; left:0; right:0; height:14px;
+    background:
+      linear-gradient(135deg, var(--parchment) 25%, transparent 25%) 0 0/16px 16px,
+      linear-gradient(-135deg, var(--parchment) 25%, transparent 25%) 0 0/16px 16px;
+    background-color:var(--ink);
+  }
+  .receipt::before{top:-13px;}
+  .receipt::after{bottom:-13px; transform:rotate(180deg);}
+  .receipt h3{
+    font-family:'JetBrains Mono',monospace;
+    text-align:center;
+    font-size:13px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:22px;
+  }
+  .receipt-line{
+    display:flex; justify-content:space-between;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13.5px;
+    padding:7px 0;
+    border-bottom:1px dashed var(--paper-line);
+  }
+  .receipt-line .v{white-space:nowrap; padding-left:12px;}
+  .receipt-total{
+    display:flex; justify-content:space-between;
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    font-size:15px;
+    padding:14px 0 8px;
+    text-decoration:line-through;
+    color:var(--ink-soft);
+  }
+  .receipt-final{
+    text-align:center;
+    margin-top:18px;
+    padding-top:18px;
+    border-top:2px solid var(--ink);
+  }
+  .receipt-final .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--chili);
+  }
+  .receipt-final .price{
+    font-family:'Fraunces',serif;
+    font-weight:900;
+    font-size:3.2rem;
+    color:var(--chili);
+    line-height:1.1;
+    margin:6px 0 18px;
+  }
+  .offer-note{
+    text-align:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:rgba(247,238,221,0.55);
+    margin-top:26px;
+  }
+  .offer .btn-primary{width:100%; margin-top:6px;}
+
+  /* ================= FAQ ================= */
+  .faq{background:var(--parchment-2);}
+  .faq-list{max-width:760px; margin:0 auto;}
+  details{
+    border-bottom:1px solid var(--paper-line);
+    padding:18px 0;
+  }
+  details summary{
+    cursor:pointer;
+    font-weight:600;
+    font-size:15.5px;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    color:var(--ink);
+  }
+  details summary::-webkit-details-marker{display:none;}
+  details summary .plus{
+    font-family:'JetBrains Mono',monospace;
+    font-size:18px;
+    color:var(--amber-deep);
+    flex:none;
+    transition:transform .2s ease;
+  }
+  details[open] summary .plus{transform:rotate(45deg);}
+  details p{
+    margin:14px 0 0;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    max-width:640px;
+  }
+
+  /* ================= FINAL CTA ================= */
+  .final-cta{
+    background:linear-gradient(180deg, #1B130D, var(--ink));
+    color:var(--cream-text);
+    text-align:center;
+  }
+  .final-cta h2{
+    font-size:clamp(2rem,4vw,3rem);
+    max-width:760px;
+    margin:0 auto 20px;
+    color:#fff;
+    line-height:1.15;
+  }
+  .final-cta p{
+    max-width:600px;
+    margin:0 auto 34px;
+    color:rgba(247,238,221,0.75);
+    font-size:17px;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 14px 30px -12px rgba(179,63,46,0.55);}
+    50%{box-shadow:0 14px 40px -8px rgba(179,63,46,0.85);}
+  }
+  .pulse{animation:pulse 2.2s ease-in-out infinite;}
+  @media (prefers-reduced-motion: reduce){
+    .pulse{animation:none;}
+    *{scroll-behavior:auto !important;}
+  }
+  .final-note{
+    margin-top:18px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    color:rgba(247,238,221,0.45);
+  }
+
+  footer{
+    background:var(--ink);
+    color:rgba(247,238,221,0.4);
+    text-align:center;
+    padding:28px 0;
+    font-size:12.5px;
+    font-family:'JetBrains Mono',monospace;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Guia Premium · +130 receitas</span>
+      <h1>Sua air fryer não é <em>lenta</em>. Ela só nunca foi <em>ensinada</em>.</h1>
+      <p class="lede">O método definitivo para transformar o eletrodoméstico mais subutilizado da sua cozinha em uma máquina de refeições crocantes, saudáveis e de dar água na boca — todos os dias, sem curso de culinária.</p>
+      <div class="hero-ctas">
+        <a href="#oferta" class="btn btn-primary pulse">Quero meu kit agora <span class="arrow">→</span></a>
+        <a href="#incluso" class="btn btn-ghost">Ver o que vem no kit</a>
+      </div>
+      <p class="trust-line">✓ Acesso imediato &nbsp;·&nbsp; ✓ Garantia de 7 dias &nbsp;·&nbsp; ✓ Pagamento único</p>
+    </div>
+
+    <div class="dial-wrap">
+      <span class="dial-needle-hint">GIRE O BOTÃO →</span>
+      <div class="dial-ring">
+        <div class="dial-inner">
+          <div class="dial-readout" id="dialReadout">MURCHA</div>
+          <div class="dial-label">textura do alimento</div>
+          <div class="dial-state" id="dialState">sem sabor, sem crocância</div>
+          <input type="range" min="0" max="100" value="0" class="dial-slider" id="dialSlider" aria-label="Arraste para ver a transformação">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEMA ============ -->
+<section class="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--chili);">O problema</span>
+      <h2>Se você tem uma air fryer, provavelmente já viveu isso</h2>
+      <p>Não é falta de talento na cozinha. É falta de método — e é exatamente isso que a maioria dos manuais de air fryer nunca ensina.</p>
+    </div>
+    <div class="card-scatter">
+      <div class="pain-card"><span class="x">✕</span><p>Você sempre faz as mesmas 4 ou 5 receitas, porque não sabe o que mais preparar.</p></div>
+      <div class="pain-card"><span class="x">✕</span><p>A comida sai sem graça — parece que falta alguma coisa, mas você não sabe o quê.</p></div>
+      <div class="pain-card"><span class="x">✕</span><p>Às vezes queima por fora e fica cru por dentro, e você nunca entende o motivo.</p></div>
+      <div class="pain-card"><span class="x">✕</span><p>Nunca acerta o tempo nem a temperatura certos — é sempre no "olho" e na sorte.</p></div>
+      <div class="pain-card"><span class="x">✕</span><p>Sua air fryer virou só a "máquina de esquentar pão de queijo congelado".</p></div>
+      <div class="pain-card"><span class="x">✕</span><p>Toda vez que abre a tampa é a mesma pergunta: "o que eu vou fazer hoje?"</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOLUÇÃO ============ -->
+<section class="solution">
+  <div class="wrap solution-grid">
+    <div>
+      <span class="eyebrow" style="color:var(--basil);">A solução</span>
+      <h2>Air Fryer Sem Segredos: a Experiência Premium</h2>
+      <p class="lede">Não é "mais um" e-book de receitas soltas. É um manual completo de domínio do equipamento — com mais de 130 receitas testadas, tempo e temperatura exatos para cada prato, e um ecossistema de bônus que resolve, de uma vez por todas, o eterno "o que vou cozinhar hoje".</p>
+    </div>
+    <div class="badge-stack">
+      <div class="badge-row"><span class="num">01</span><p>Guia completo com receitas, tempo, temperatura e nível de dificuldade em cada página.</p></div>
+      <div class="badge-row"><span class="num">02</span><p>Cardápios e planners prontos, para você nunca mais decidir na hora.</p></div>
+      <div class="badge-row"><span class="num">03</span><p>Tabelas de referência para acertar qualquer alimento, sempre.</p></div>
+      <div class="badge-row"><span class="num">04</span><p>Guias de cuidado, limpeza e escolha do aparelho ideal.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BENEFÍCIOS ============ -->
+<section class="benefits">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow" style="justify-content:center;">Benefícios</span>
+      <h2>O que muda na sua cozinha a partir de hoje</h2>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit-item"><span class="check">✓</span><p>Nunca mais fica sem ideia do que cozinhar.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Refeições completas em metade do tempo do forno.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Até 80% menos gordura, sem perder o sabor.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Acerta tempo e temperatura de qualquer receita.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Fim da comida queimada ou crua por dentro.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Cozinha impecável, sem cheiro de fritura.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Do café da manhã à sobremesa, tudo na air fryer.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Saiba exatamente qual air fryer comprar.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Aumenta a vida útil do seu aparelho.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Cardápio pronto para 30 dias, sem esforço.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Lista de compras inteligente, sem desperdício.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Receitas mais crocantes por fora, suculentas por dentro.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Opções fitness para quem quer emagrecer com sabor.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Sobremesas que impressionam a família.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Refeições prontas em menos de 15 minutos.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Domínio de temperos e molhos como um chef.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Evita os 20 erros mais comuns na air fryer.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Tabela mestra de tempo e temperatura sempre à mão.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Economiza horas de pesquisa no Google e YouTube.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Resgata o prazer de cozinhar (e comer) todos os dias.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Receitas econômicas para o fim do mês.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Planeje o mês inteiro de refeições em minutos.</p></div>
+      <div class="benefit-item"><span class="check">✓</span><p>Orgulho de servir pratos que arrancam elogios.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ O QUE VEM NO KIT ============ -->
+<section class="included" id="incluso">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">O que vem no kit</span>
+      <h2>Um ecossistema completo, não só um e-book</h2>
+      <p>O produto principal + 10 bônus estratégicos, feitos para resolver o planejamento alimentar de ponta a ponta.</p>
+    </div>
+
+    <div class="main-product">
+      <div class="book-icon" aria-hidden="true"></div>
+      <div>
+        <span class="tag">Produto principal</span>
+        <h3>Air Fryer Sem Segredos: A Experiência Premium</h3>
+        <p>Mais de 130 receitas exclusivas organizadas por capítulo — café da manhã, lanches, almoço, jantar, sobremesas, fitness e econômicas — com tempo, temperatura e nível de dificuldade em cada página, além de guias de escolha, limpeza e manutenção do aparelho.</p>
+      </div>
+    </div>
+
+    <div class="menu-list">
+      <div class="menu-item"><div class="left"><div class="name">Bônus 1 — Cardápio Descomplicado: 30 Dias</div><div class="desc">Cardápio completo e balanceado para o mês inteiro, refeição por refeição.</div></div><div class="price">R$ 47,00</div></div>
+      <div class="menu-item"><div class="left"><div class="name">Bônus 2 — Lista de Compras Inteligente</div><div class="desc">Organizada por categoria e semana, direto do cardápio de 30 dias.</div></div><div class="price">R$ 27,00</div></div>
+      <div class="menu-item"><div class="left"><div class="name">Bônus 3 — Planner Semanal Air Fryer</div><div class="desc">Planeje dia a dia com controle total sobre o que você come.</div></div><div class="price">R$ 27,00</div></div>
+      <div class="menu-item"><div class="left"><div class="name">Bônus 4 — Planner Mensal Air Fryer</div><div class="desc">Visão macro do mês, sem cair na mesma rotina de sempre.</div></div><div class="price">R$ 37,00</div></div>
+      <div class="menu-item"><div class="left"><div class="name">Bônus 5 — Tabela Mestra de Tempo e Temperatura</div><div class="desc">Referência definitiva para mais de 100 tipos de alimentos.</div></div><div class="price">R$ 27,00</div></div>
+      <div class="menu-item"><div class="left"><div class="name">Bônus 6 — Guia Completo de Temperos</div><div class="desc">Combinações certas para elevar qualquer prato.</div></div><div class="price">R$ 27,00</div></div>
+      <div class="menu-item"><div class="left"><div class="name">Bônus 7 — Molhos Irresistíveis</div><div class="desc">Receitas exclusivas para acompanhar suas criações.</div></div><div class="price">R$ 27,00</div></div>
+      <div class="menu-item"><div class="left"><div class="name">Bônus 8 — Fitness na Air Fryer</div><div class="desc">Receitas leves e nutritivas para o dia a dia.</div></div><div class="price">R$ 37,00</div></div>
+      <div class="menu-item"><div class="left"><div class="name">Bônus 9 — Doçuras Crocantes</div><div class="desc">Sobremesas incríveis, do bolo ao churros na air fryer.</div></div><div class="price">R$ 27,00</div></div>
+      <div class="menu-item"><div class="left"><div class="name">Bônus 10 — Ultra Rápido: Menos de 15 Minutos</div><div class="desc">Refeições completas para os dias mais corridos.</div></div><div class="price">R$ 27,00</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRANSFORMAÇÃO ============ -->
+<section class="transformation">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow" style="justify-content:center;">A transformação</span>
+      <h2>Sua rotina, daqui a 30 dias</h2>
+    </div>
+    <div class="transform-panel">
+      <div class="transform-half before">
+        <span class="tag">Hoje</span>
+        <p>Você abre a air fryer e não sabe o que preparar. Pesquisa receita, erra o ponto, a comida sai sem graça. A cozinha fica suja de óleo e o cheiro de fritura fica pela casa inteira.</p>
+      </div>
+      <div class="transform-half after">
+        <span class="tag">Com o kit</span>
+        <p>Seu cardápio do mês já está pronto. Você acerta tempo e temperatura na primeira tentativa. A família elogia o prato. Sua cozinha está limpa, e sobrou tempo livre no fim do dia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPOIMENTOS ============ -->
+<section class="testimonials" style="background:var(--parchment);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Depoimentos</span>
+      <h2>O que dizem sobre a experiência</h2>
+    </div>
+    <p class="testi-note">Os depoimentos abaixo são exemplos ilustrativos, criados para fins de demonstração, e não representam avaliações reais de clientes.</p>
+    <div class="testi-grid">
+      <div class="ticket">
+        <p class="quote">"Eu só fazia batata congelada na minha air fryer. Depois do guia, comecei a fazer o jantar inteiro nela."</p>
+        <div class="who">MARIANA, 34</div>
+        <span class="illus">depoimento ilustrativo</span>
+      </div>
+      <div class="ticket">
+        <p class="quote">"Nunca mais errei o tempo de nada. A tabela de temperatura sozinha já valeu o investimento."</p>
+        <div class="who">CARLOS, 41</div>
+        <span class="illus">depoimento ilustrativo</span>
+      </div>
+      <div class="ticket">
+        <p class="quote">"Morava sozinha e não sabia cozinhar nada. Com o cardápio de 30 dias, parei de pedir delivery quase todo dia."</p>
+        <div class="who">FERNANDA, 27</div>
+        <span class="illus">depoimento ilustrativo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GARANTIA ============ -->
+<section class="guarantee">
+  <div class="wrap">
+    <div class="stamp">
+      <span class="num">7</span>
+      <span class="txt">dias de garantia</span>
+    </div>
+    <h2>Risco zero. A decisão é sua, sem pressão.</h2>
+    <p>Teste o Air Fryer Sem Segredos por 7 dias. Se não gostar, basta enviar um e-mail dentro do prazo e devolvemos 100% do seu investimento — sem perguntas, sem burocracia.</p>
+  </div>
+</section>
+
+<!-- ============ OFERTA ============ -->
+<section class="offer" id="oferta">
+  <div class="wrap">
+    <div class="section-head center" style="max-width:520px;">
+      <span class="eyebrow" style="justify-content:center;">Oferta de lançamento</span>
+      <h2 style="color:#fff;">Tudo isso por uma fração do valor</h2>
+    </div>
+
+    <div class="receipt">
+      <h3>Resumo do pedido</h3>
+      <div class="receipt-line"><span>Produto principal</span><span class="v">R$ 97,00</span></div>
+      <div class="receipt-line"><span>Bônus 1 — Cardápio 30 Dias</span><span class="v">R$ 47,00</span></div>
+      <div class="receipt-line"><span>Bônus 2 — Lista de Compras</span><span class="v">R$ 27,00</span></div>
+      <div class="receipt-line"><span>Bônus 3 — Planner Semanal</span><span class="v">R$ 27,00</span></div>
+      <div class="receipt-line"><span>Bônus 4 — Planner Mensal</span><span class="v">R$ 37,00</span></div>
+      <div class="receipt-line"><span>Bônus 5 — Tabela Mestra</span><span class="v">R$ 27,00</span></div>
+      <div class="receipt-line"><span>Bônus 6 — Guia de Temperos</span><span class="v">R$ 27,00</span></div>
+      <div class="receipt-line"><span>Bônus 7 — Molhos Irresistíveis</span><span class="v">R$ 27,00</span></div>
+      <div class="receipt-line"><span>Bônus 8 — Fitness na Air Fryer</span><span class="v">R$ 37,00</span></div>
+      <div class="receipt-line"><span>Bônus 9 — Doçuras Crocantes</span><span class="v">R$ 27,00</span></div>
+      <div class="receipt-line"><span>Bônus 10 — Ultra Rápido</span><span class="v">R$ 27,00</span></div>
+      <div class="receipt-total"><span>Total</span><span>R$ 407,00</span></div>
+
+      <div class="receipt-final">
+        <div class="label">Hoje, por tempo limitado</div>
+        <div class="price">R$ 47,90</div>
+        <a href="#" class="btn btn-primary pulse">Sim! Quero meu kit agora <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <p class="offer-note">⏳ Oferta de lançamento por tempo limitado — o valor pode subir a qualquer momento.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow" style="justify-content:center;">Perguntas frequentes</span>
+      <h2>Ainda com dúvidas?</h2>
+    </div>
+    <div class="faq-list">
+      <details><summary>Como recebo o material depois da compra?<span class="plus">+</span></summary><p>Você recebe acesso imediato por e-mail, podendo baixar tudo em PDF logo após a confirmação do pagamento.</p></details>
+      <details><summary>Funciona para qualquer marca de air fryer?<span class="plus">+</span></summary><p>Sim. O guia foi feito para funcionar com qualquer modelo de air fryer do mercado, elétrica ou forno de ar.</p></details>
+      <details><summary>Preciso saber cozinhar para usar o guia?<span class="plus">+</span></summary><p>Não. O material foi criado justamente para quem não sabe cozinhar nada e quer aprender do zero.</p></details>
+      <details><summary>As receitas são difíceis de fazer?<span class="plus">+</span></summary><p>Não. Todas as receitas indicam claramente o nível de dificuldade, e a maioria é simples e rápida.</p></details>
+      <details><summary>Recebo os bônus junto com o produto principal?<span class="plus">+</span></summary><p>Sim, todos os bônus estão inclusos automaticamente na compra, sem custo adicional.</p></details>
+      <details><summary>O material é físico ou digital?<span class="plus">+</span></summary><p>100% digital. Você acessa em qualquer celular, tablet ou computador, a qualquer hora.</p></details>
+      <details><summary>Tem garantia?<span class="plus">+</span></summary><p>Sim, garantia incondicional de 7 dias. Se não gostar, devolvemos seu dinheiro integralmente.</p></details>
+      <details><summary>Quanto tempo tenho acesso ao material?<span class="plus">+</span></summary><p>O acesso é vitalício, sem mensalidades ou taxas recorrentes.</p></details>
+      <details><summary>Existe alguma taxa extra além do valor anunciado?<span class="plus">+</span></summary><p>Não. O valor mostrado na oferta é o único investimento necessário.</p></details>
+      <details><summary>Posso pagar no cartão parcelado?<span class="plus">+</span></summary><p>Sim, a compra pode ser parcelada nas opções disponibilizadas na página de pagamento.</p></details>
+      <details><summary>E se eu tiver dúvidas durante o uso do material?<span class="plus">+</span></summary><p>Você pode entrar em contato pelo e-mail de suporte informado após a compra.</p></details>
+      <details><summary>As receitas servem para quantas pessoas?<span class="plus">+</span></summary><p>A maioria das receitas indica o rendimento, podendo ser ajustada facilmente para mais ou menos porções.</p></details>
+      <details><summary>Tem receitas para quem quer emagrecer?<span class="plus">+</span></summary><p>Sim, o Bônus Fitness na Air Fryer foi criado especialmente para isso.</p></details>
+      <details><summary>Tem receitas doces, além das salgadas?<span class="plus">+</span></summary><p>Sim, o guia inclui um capítulo completo de sobremesas feitas na air fryer.</p></details>
+      <details><summary>Preciso comprar mais alguma coisa para usar o guia?<span class="plus">+</span></summary><p>Não. Você só precisa da sua air fryer e dos ingredientes indicados em cada receita.</p></details>
+      <details><summary>O cardápio de 30 dias é obrigatório de seguir à risca?<span class="plus">+</span></summary><p>Não, ele é um guia flexível — você pode adaptar conforme sua rotina e preferências.</p></details>
+      <details><summary>O material ensina a limpar e cuidar da air fryer?<span class="plus">+</span></summary><p>Sim, há um guia completo de limpeza e manutenção para aumentar a vida útil do aparelho.</p></details>
+      <details><summary>Vou aprender a evitar comida queimada ou crua?<span class="plus">+</span></summary><p>Sim, o guia traz os 20 erros mais comuns e como evitá-los, além da tabela de tempo e temperatura.</p></details>
+      <details><summary>É seguro comprar nesta página?<span class="plus">+</span></summary><p>Sim, a compra é processada em ambiente seguro, com certificado de proteção de dados.</p></details>
+      <details><summary>Como faço para garantir minha vaga na promoção?<span class="plus">+</span></summary><p>Basta clicar no botão de compra e concluir o pedido antes que o valor promocional termine.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Sua air fryer já está na sua cozinha. O que faltava era o método.</h2>
+    <p>Acabe de vez com o "o que vou cozinhar hoje", pare de errar tempo e temperatura, e transforme sua air fryer na ferramenta mais usada da sua casa — com garantia total de 7 dias e risco zero.</p>
+    <a href="#oferta" class="btn btn-primary pulse">Sim! Quero meu kit agora <span class="arrow">→</span></a>
+    <div class="final-note">Oferta por tempo limitado — garanta o seu antes que o preço promocional acabe.</div>
+  </div>
+</section>
+
+<footer>
+  Air Fryer Sem Segredos © 2026 — Todos os direitos reservados.
+</footer>
+
+<script>
+  const slider = document.getElementById('dialSlider');
+  const readout = document.getElementById('dialReadout');
+  const state = document.getElementById('dialState');
+  const ring = document.querySelector('.dial-ring');
+
+  const states = [
+    {max:20,  read:'MURCHA',    text:'sem sabor, sem crocância'},
+    {max:45,  read:'MORNA',     text:'ainda sem graça nenhuma'},
+    {max:70,  read:'DOURANDO',  text:'quase lá... falta método'},
+    {max:90,  read:'CROCANTE',  text:'crocante por fora, suculenta por dentro'},
+    {max:101, read:'PERFEITA',  text:'nível chef, sem esforço'}
+  ];
+
+  function update(val){
+    const s = states.find(s => val < s.max);
+    readout.textContent = s.read;
+    state.textContent = s.text;
+    const hue = 130 - (val/100)*130; // green-ish to red/amber sweep via conic already; adjust rotation
+    ring.style.filter = `saturate(${1 + val/120})`;
+  }
+
+  slider.addEventListener('input', e => update(Number(e.target.value)));
+  update(0);
+</script>
+
+</body>
+</html>
